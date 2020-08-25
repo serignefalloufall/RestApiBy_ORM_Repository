@@ -1,5 +1,6 @@
 <?php
-require_once "service/ServiceController.php";
-$service = new ServiceController();
+require_once "check_url/Demarrage.php";
 
-$service->getAll();
+use checkUrl\Demarrage;
+
+new Demarrage();

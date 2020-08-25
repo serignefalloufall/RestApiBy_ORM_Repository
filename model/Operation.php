@@ -59,4 +59,84 @@ class Operation
 
                 return $this;
         }
+
+        /**
+         * Get the value of id
+         */ 
+        public function getId()
+        {
+                return $this->id;
+        }
+
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of montant
+         */ 
+        public function getMontant()
+        {
+                return $this->montant;
+        }
+
+        /**
+         * Set the value of montant
+         *
+         * @return  self
+         */ 
+        public function setMontant($montant)
+        {
+                $this->montant = $montant;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of date_operation
+         */ 
+        public function getDate_operation()
+        {
+                return $this->date_operation;
+        }
+
+        /**
+         * Set the value of date_operation
+         *
+         * @return  self
+         */ 
+        public function setDate_operation($date_operation)
+        {
+                $this->date_operation = $date_operation;
+
+                return $this;
+        }
+
+        /**
+         * Get many operation have one compte. This is the owning side.
+         */ 
+        public function getCompte_id()
+        {
+                return $this->compte_id;
+        }
+
+        /**
+         * Set many operation have one compte. This is the owning side.
+         *
+         * @return  self
+         */ 
+        public function setCompte_id($compte_id)
+        {
+                $this->compte_id = $compte_id;
+
+                return $this;
+        }
 }

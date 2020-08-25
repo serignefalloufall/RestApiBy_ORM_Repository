@@ -1,41 +1,41 @@
 <?php
 
-    header('Content-Type: application/json');
-    header('Access-Control-Allow-Origin: *');
-    require_once 'bootstrap.php';
-    $result = $entityManager->createQuery("SELECT r FROM Region r")->getResult();
-    
-    $i = 0;
-    foreach($result as $r)
+class ServiceController
+{
+
+    //Cette function permet au client de conaitre son solde a travers son numCompte
+    public function getSoldeCompteByNum($num_compte)
     {
-        $tabRegion = [
-            "id"=>$r->getId(),
-            "nom"=>$r->getNom()
-        ];
-        $data[$i] = $tabRegion;
-        $i++;
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        require_once 'bootstrap.php';
+
+        $solde = $entityManager
+                               ->createQuery("SELECT c.solde FROM Compte c 
+                                              WHERE c.num_compte = ".$num_compte)
+                                ->getResult();
+       echo json_encode($solde);
+       
     }
-    echo json_encode($data);
 
-//echo json_encode($result);
-// class ServiceController{
+    //Cette function permet de lister l'enseble des operation pour un compte
+    public function getAllOperation($num_compte)
+    {
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        require_once 'bootstrap.php';
 
-
-//     public function getAll()
-//     {
-        
-//     require_once './bootstrap.php';
-
-//         $result = $entityManager->createQuery("SELECT r FROM Region r")->getResult();
-//         // foreach($result as $r)
-//         // {
-//         // echo $r->getId();
-//         // echo "<br>";
-//         // echo $r->getNom();
-//         // echo "<br>";
-//         // }
-//         echo json_encode($result);
-//     }
-// }
+        $client_operation = $entityManager
+                                ->createQuery("SELECT o.id, o.date_operation, 
+                                                      o.montant, ty.libelle  
+                                               FROM Compte c, Operation o, Typeoperation ty 
+                                               WHERE c.num_compte = ".$num_compte." and o.compte_id = c.id GROUP BY o.id")
+                                ->getResult();
+        echo json_encode($client_operation);
+                               
+                              
+       
+    }
+}
 
 ?>
